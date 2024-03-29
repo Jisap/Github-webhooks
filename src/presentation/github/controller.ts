@@ -16,14 +16,18 @@ export class GithubController {
     const signature = req.header('x-hub-signature-256') ?? 'unknown'
     const payload = req.body;
 
+    let message:string;
+
     switch( githubEvent ){
       case 'star':
-        this.githubService.onStar(payload)
+        message = this.githubService.onStar(payload)
       break;
 
       default:
-        console.log(`Unknown event ${githubEvent}`)
+        message = `Unknown event ${githubEvent}`
     }
+
+    console.log({ message })
 
     res.status(202).send('Accepted')
   }

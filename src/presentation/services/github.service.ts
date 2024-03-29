@@ -8,12 +8,10 @@ export class GithubService {
   constructor(){}
 
   onStar( payload: GitHubStartPayload): string {
+
+    const  { action, sender, repository, starred_at } = payload;
     
-    let message:string = '';
-
-    const  { starred_at } = payload;
-    console.log(starred_at)
-
-    return message
+    return `User ${sender.login} ${action} star on ${repository.full_name}`
+    
   }
 }
